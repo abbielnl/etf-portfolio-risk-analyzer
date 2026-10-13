@@ -145,6 +145,55 @@ def calculate_portfolio_returns(returns):
 
     return pd.DataFrame(portfolio_returns)
 
+
+def plot_portfolio_allocations():
+    """Visualize ETF weights across the three portfolio strategies."""
+
+    allocations = pd.DataFrame({
+        "Conservative": {
+            "VOO": 20,
+            "QQQ": 10,
+            "IWM": 10,
+            "AGG": 60
+        },
+        "Balanced": {
+            "VOO": 35,
+            "QQQ": 15,
+            "IWM": 10,
+            "AGG": 40
+        },
+        "Growth": {
+            "VOO": 45,
+            "QQQ": 30,
+            "IWM": 15,
+            "AGG": 10
+        }
+    })
+
+    ax = allocations.T.plot(
+        kind="bar",
+        stacked=True,
+        figsize=(10, 6)
+    )
+
+    ax.set_title("ETF Allocation by Portfolio Strategy")
+    ax.set_xlabel("Portfolio Strategy")
+    ax.set_ylabel("Allocation (%)")
+    ax.set_ylim(0, 100)
+    ax.legend(title="ETF")
+    ax.grid(axis="y", alpha=0.3)
+
+    plt.tight_layout()
+    plt.savefig(
+        OUTPUT_DIR / "portfolio_allocations.png",
+        dpi=300,
+        bbox_inches="tight"
+    )
+    plt.show()
+    plt.close()
+
+    print("Saved portfolio allocation chart to outputs/portfolio_allocations.png")
+
 def main():
     prices = download_prices()
     validate_prices(prices)
@@ -194,6 +243,7 @@ def main():
 
     print("Saved portfolio growth chart to outputs/portfolio_growth.png")
 
+    plot_portfolio_allocations()
 
     # Calculate risk and return metrics for each portfolio
     portfolio_metrics = pd.DataFrame({
