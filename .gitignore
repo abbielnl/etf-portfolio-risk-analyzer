@@ -29,6 +29,7 @@ data/*
 outputs/*
 !outputs/etf_correlation_heatmap.png
 !outputs/portfolio_growth.png
+!outputs/portfolio_allocations.png
 
 # Temporary files
 *.log
