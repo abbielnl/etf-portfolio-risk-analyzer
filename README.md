@@ -64,7 +64,7 @@ Annualized volatility is estimated using the standard deviation of daily returns
 - Calculate the Sharpe ratio as the annualized portfolio or ETF return minus the assumed annual risk-free rate, divided by annualized volatility. The default risk-free rate is 0%.
 - Interpret the Sharpe ratio alongside annualized return, volatility and maximum drawdown. A higher ratio indicates more return per unit of measured volatility under the assumptions used.
 
-## Outputs
+## OUTPUTS
 
 ### Visualizations
 
@@ -93,7 +93,6 @@ Compares the percentage allocated to each ETF under the three portfolio strategi
 - `data/return_correlation.csv` — correlation matrix for ETF daily returns.
 
 The historical price dataset is generated locally and excluded from version control.
-
 ## Limitations
 
 - Historical performance does not guarantee future results.
