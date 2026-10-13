@@ -70,7 +70,7 @@ Annualized volatility is estimated using the standard deviation of daily returns
 
 **Portfolio Growth**
 
-Shows the hypothetical growth of a $10,000 investment across the Conservative, Balanced and Growth strategies.
+Visualizes the hypothetical growth of a user-defined initial investment across the Conservative, Balanced and Growth portfolio strategies over the historical analysis period.
 
 ![Portfolio Growth Chart](outputs/portfolio_growth.png)
 
