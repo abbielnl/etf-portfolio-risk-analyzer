@@ -61,6 +61,8 @@ These results illustrate the historical relationship between risk, return and di
 7. Generate charts and export performance metrics to CSV.
 
 Annualized volatility is estimated using the standard deviation of daily returns multiplied by the square root of 252 trading days. Annualized returns are estimated by compounding daily returns over the observed period.
+- Calculate the Sharpe ratio as the annualized portfolio or ETF return minus the assumed annual risk-free rate, divided by annualized volatility. The default risk-free rate is 0%.
+- Interpret the Sharpe ratio alongside annualized return, volatility and maximum drawdown. A higher ratio indicates more return per unit of measured volatility under the assumptions used.
 
 ## Outputs
 

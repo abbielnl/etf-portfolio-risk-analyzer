@@ -12,6 +12,10 @@ TICKERS = ["VOO", "QQQ", "AGG", "IWM"]
 START_DATE = "2019-01-01"
 END_DATE = "2026-01-01"
 
+
+RISK_FREE_RATE = 0.0
+
+
 DATA_DIR = Path("data")
 DATA_DIR.mkdir(exist_ok=True)
 OUTPUT_DIR = Path("outputs")
@@ -87,14 +91,11 @@ def calculate_metrics(returns):
 
         # Annualized standard deviation of daily returns
         annualized_volatility = returns.std() * np.sqrt(252)
-
         
-        risk_free_rate = 0.0
-
         sharpe_ratio = (
-        (annualized_return - risk_free_rate) / annualized_volatility
-        if annualized_volatility != 0
-        else np.nan
+            (annualized_return - RISK_FREE_RATE) / annualized_volatility
+            if annualized_volatility != 0
+            else np.nan
         )
 
         # Largest decline from a previous wealth peak
