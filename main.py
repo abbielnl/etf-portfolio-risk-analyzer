@@ -209,12 +209,36 @@ def main():
     print((portfolio_returns.head() * 100).round(3))
 
     
-    # Track the growth of a hypothetical $10,000 investment
-    initial_investment = 10_000
+    
+    # Track the growth of a hypothetical investment
+    initial_investment = float(
+        input("Enter your initial investment amount ($): ")
+    )
 
+    if initial_investment <= 0:
+        raise ValueError("Investment amount must be greater than zero.")
+
+    
     portfolio_values = (
         (1 + portfolio_returns).cumprod() * initial_investment
     )
+
+    # Add the initial investment before the first daily return.
+    start_date = portfolio_returns.index[0] - pd.Timedelta(days=1)
+
+    
+    initial_values = pd.DataFrame(
+        [[initial_investment] * len(portfolio_returns.columns)],
+        columns=portfolio_returns.columns,
+        index=[start_date]
+    )
+
+
+    portfolio_values = pd.concat([initial_values, portfolio_values])
+
+    
+    print("\nPORTFOLIO ENDING VALUES ($):")
+    print(portfolio_values.iloc[-1].round(2).to_string())
 
     plt.figure(figsize=(12, 6))
 
@@ -225,7 +249,11 @@ def main():
             label=portfolio
         )
 
-    plt.title("Growth of a Hypothetical $10,000 Investment")
+    
+    plt.title(
+        f"Growth of a Hypothetical ${initial_investment:,.0f} Investment"
+    )
+
     plt.xlabel("Date")
     plt.ylabel("Portfolio Value ($)")
     plt.legend()
