@@ -66,13 +66,33 @@ Annualized volatility is estimated using the standard deviation of daily returns
 
 ## Outputs
 
-The analysis generates:
+### Visualizations
 
-- `etf_correlation_heatmap.png` — ETF return correlation heatmap.
-- `portfolio_growth.png` — hypothetical portfolio growth chart.
-- `etf_metrics.csv` — individual ETF performance metrics.
-- `portfolio_metrics.csv` — portfolio performance metrics.
-- `return_correlation.csv` — ETF return correlation matrix.
+**Portfolio Growth**
+
+Shows the hypothetical growth of a $10,000 investment across the Conservative, Balanced and Growth strategies.
+
+![Portfolio Growth Chart](outputs/portfolio_growth.png)
+
+**ETF Return Correlation**
+
+Shows the historical correlations between the daily returns of the four ETFs.
+
+![ETF Correlation Heatmap](outputs/etf_correlation_heatmap.png)
+
+**Portfolio Allocation**
+
+Compares the percentage allocated to each ETF under the three portfolio strategies.
+
+![Portfolio Allocation Chart](outputs/portfolio_allocations.png)
+
+### Exported Data
+
+- `data/etf_metrics.csv` — annualized return, annualized volatility, maximum drawdown and Sharpe ratio for each ETF.
+- `data/portfolio_metrics.csv` — risk and return metrics for each portfolio strategy.
+- `data/return_correlation.csv` — correlation matrix for ETF daily returns.
+
+The historical price dataset is generated locally and excluded from version control.
 
 ## Limitations
 
