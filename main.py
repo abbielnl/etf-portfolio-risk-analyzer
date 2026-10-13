@@ -88,12 +88,22 @@ def calculate_metrics(returns):
         # Annualized standard deviation of daily returns
         annualized_volatility = returns.std() * np.sqrt(252)
 
+        
+        risk_free_rate = 0.0
+
+        sharpe_ratio = (
+        (annualized_return - risk_free_rate) / annualized_volatility
+        if annualized_volatility != 0
+        else np.nan
+        )
+
         # Largest decline from a previous wealth peak
         running_peak = wealth.cummax()
         drawdowns = wealth / running_peak - 1
         max_drawdown = drawdowns.min()
 
         return {
+            "Sharpe Ratio": sharpe_ratio,
             "Annualized Return": annualized_return,
             "Annualized Volatility": annualized_volatility,
             "Maximum Drawdown": max_drawdown
@@ -190,8 +200,21 @@ def main():
         for name in portfolio_returns.columns
     }).T
 
-    print("\nPORTFOLIO RISK AND RETURN COMPARISON (%):")
-    print((portfolio_metrics * 100).round(2).to_string())
+    
+    print("\nPORTFOLIO RISK AND RETURN COMPARISON:")
+
+    portfolio_display = portfolio_metrics.copy()
+
+    percentage_columns = [
+        "Annualized Return",
+        "Annualized Volatility",
+        "Maximum Drawdown"
+    ]
+
+    portfolio_display[percentage_columns] *= 100
+
+    print(portfolio_display.round(2).to_string())
+
 
     
     # Save portfolio performance metrics
@@ -208,10 +231,21 @@ def main():
         for ticker in returns.columns
     }).T
 
-    print("\nETF RISK AND RETURN COMPARISON (%):")
-    print((metrics * 100).round(2).to_string())
-
+    print("\nETF RISK AND RETURN COMPARISON")
     
+    metrics_display = metrics.copy()
+
+    percentage_columns = [
+        "Annualized Return",
+        "Annualized Volatility",
+        "Maximum Drawdown"
+    ]
+
+    metrics_display[percentage_columns] *= 100
+
+    print(metrics_display.round(2))
+
+
     # Save individual ETF performance metrics
     metrics.to_csv(
         DATA_DIR / "etf_metrics.csv"
